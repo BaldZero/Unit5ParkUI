@@ -9,7 +9,7 @@ public class Difficulty : MonoBehaviour
 
     private GameManager gameManager;
 
-    public RawImage titleScreen;
+    public GameObject titleScreen;
     // Start is called before the first frame update
     void Start()
     {
