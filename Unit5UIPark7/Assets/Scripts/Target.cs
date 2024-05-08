@@ -10,9 +10,12 @@ public class Target : MonoBehaviour
     private float maxSpeed = 16;
     private float maxTorque = 10;
     private float xRange = 4;
-    private float yRange = -2;
+    private float yRange = -1;
+
+    public AudioClip badHit;
 
     public int pointValue;
+    private int lifeMinus = -1;
     public ParticleSystem clickedParticle;
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,7 @@ public class Target : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         transform.position = RandomSpawnPos();
+        badHit = GetComponent<AudioClip>();
     }
 
     // Update is called once per frame
@@ -37,6 +41,10 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
         gameManager.UpdateScore(pointValue);
         Instantiate(clickedParticle, transform.position, transform.rotation);
+        if (gameObject.CompareTag("Bad"))
+        {
+            gameManager.LifeUpdate(lifeMinus);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +54,7 @@ public class Target : MonoBehaviour
             Destroy(gameObject);
             if (!gameObject.CompareTag("Bad"))
             {
-                gameManager.GameOver();
+                gameManager.LifeUpdate(lifeMinus);
             }
         }
     }
