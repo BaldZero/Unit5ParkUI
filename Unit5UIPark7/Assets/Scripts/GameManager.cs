@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int score;
     public bool isGameActive;
     private int life;
-    public GameObject pauseScreen;
+    public RawImage pauseScreen;
 
     public AudioSource gameSource;
     // Start is called before the first frame update
@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
     }
 
     IEnumerator SpawnTarget()
@@ -74,7 +78,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0;
-        pauseScreen.SetActive(true);
+        pauseScreen.gameObject.SetActive(true);
     }
 
     public void StartGame(int difficulty)
