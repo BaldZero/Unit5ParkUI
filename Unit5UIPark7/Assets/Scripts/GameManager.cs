@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
     private int score;
     public bool isGameActive;
     private int life;
+    public GameObject pauseScreen;
 
-
+    public AudioSource gameSource;
     // Start is called before the first frame update
     void Start()
     {  
@@ -68,6 +69,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
     }
 
     public void StartGame(int difficulty)
