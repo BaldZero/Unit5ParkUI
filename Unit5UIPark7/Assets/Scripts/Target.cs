@@ -12,7 +12,8 @@ public class Target : MonoBehaviour
     private float xRange = 4;
     private float yRange = -1;
 
-    public AudioClip badHit;
+    public AudioClip hit;
+    private AudioSource hitSource;
 
     public int pointValue;
     private int lifeMinus = -1;
@@ -28,7 +29,7 @@ public class Target : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         transform.position = RandomSpawnPos();
-        badHit = GetComponent<AudioClip>();
+        hitSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class Target : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        hitSource.PlayOneShot(hit, 1.0f);
         Destroy(gameObject);
         gameManager.UpdateScore(pointValue);
         Instantiate(clickedParticle, transform.position, transform.rotation);
