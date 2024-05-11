@@ -74,11 +74,7 @@ public class GameManagerX : MonoBehaviour
             }
         }
     }
-    private void TimeDisplay(float timeToDisplay)
-    {
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timeText.text = "Time: " + 
-    }
+
     public void Start()
     {
         timeIsRunning = true;   
