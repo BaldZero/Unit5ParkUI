@@ -64,20 +64,31 @@ public class GameManagerX : MonoBehaviour
         return spawnPosition;
 
     }
-    public void Update()
+    public void FixedUpdate()
     {
-        if (timeIsRunning)
+        if(isGameActive == true)
         {
-            if(countDown > 0)
-            {
-                countDown -= Time.deltaTime;
-            }
+            Timer();
         }
     }
 
     public void Start()
     {
         timeIsRunning = true;   
+    }
+
+    void Timer()
+    {
+        if(timeIsRunning == true)
+        {
+            countDown -= Time.deltaTime;
+            timeText.text = "Time: " + Mathf.FloorToInt(countDown);
+            if(countDown < 1)
+            {
+                timeIsRunning = false;
+                GameOver();
+            }
+        }
     }
 
     // Generates random square index from 0 to 3, which determines which square the target will appear in
